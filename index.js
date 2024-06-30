@@ -35,11 +35,22 @@ app.use('/api/todos', require('./routes/todos'));
 app.use('/api/reminders', require('./routes/reminders'));
 app.use('/api/contactus', require('./routes/contactus'));
 
-// setInterval(async () => {
-//   console.log('Hey');
-// }, 1000);
+// Catch-all handler for any other route not explicitly handled above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 // main.js
+
+// Memory usage monitor
+// setInterval(() => {
+//   const memoryUsage = process.memoryUsage();
+//   console.log(`RSS: ${memoryUsage.rss / 1024 / 1024} MB`);
+//   console.log(`Heap Total: ${memoryUsage.heapTotal / 1024 / 1024} MB`);
+//   console.log(`Heap Used: ${memoryUsage.heapUsed / 1024 / 1024} MB`);
+//   console.log(`External: ${memoryUsage.external / 1024 / 1024} MB`);
+// }, 5000); // Print memory usage every 10 seconds
+// // ----------------------------------------------
 
 // Listen for messages from the worker thread
 worker.on('message', message => {
