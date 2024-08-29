@@ -35,6 +35,13 @@ app.use('/api/todos', require('./routes/todos'));
 app.use('/api/reminders', require('./routes/reminders'));
 app.use('/api/contactus', require('./routes/contactus'));
 
+// Trigger route
+app.get('/api/trigger', (req, res) => {
+  console.log('Trigger route accessed!');
+  // Perform your action here
+  res.json({ message: 'Trigger action performed successfully!' });
+});
+
 // Catch-all handler for any other route not explicitly handled above
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
